@@ -11,8 +11,6 @@ function AddTodo({ addNewTodo }) {
     if (event.charCode === 13) {
       addNewTodo({
         title: todoName,
-        id: Date.now(),
-        completed: false
       });
       setTodo("");
     }
@@ -41,9 +39,7 @@ function AddTodo({ addNewTodo }) {
 
 
 AddTodo.propTypes = {
-  id: PropTypes.number,
   title: PropTypes.string,
-  completed: PropTypes.bool,
   addNewTodo: PropTypes.func
 }
 

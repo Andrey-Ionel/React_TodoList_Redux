@@ -30,10 +30,10 @@ const todosReducer = (state = [], { type, payload }) => {
       )
 
     case TOGGLE_ALL_TODOS:
-      return state.map(todo => {
-        todo.completed = payload.completed;
-        return todo;
-      }
+      return state.map(todo =>
+        (payload)
+          ? { ...todo, completed: payload.completed }
+          : todo
       )
 
     case REMOVE_TODO:
@@ -47,11 +47,7 @@ const todosReducer = (state = [], { type, payload }) => {
       )
 
     case CLEAR_COMPLETED_TODOS:
-      return state.filter(todo =>
-        (todo.completed)
-          ? !todo.completed
-          : todo
-      )
+      return state.filter(todo => !todo.completed)
 
     default:
       return state

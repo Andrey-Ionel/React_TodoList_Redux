@@ -1,14 +1,30 @@
 import React from "react";
 import "./footer.css";
+import FooterFilterButtons from "../FooterFilterButtons/FooterFilterButtons"
+import { FilterStatus } from "../../utils/enums";
 
 function Footer({
   clearCompletedTodos,
   uncompletedTodosCount,
-  filter,
   setFilter,
-  hasCompleted
-
+  hasCompleted,
+  filter
 }) {
+  const FilterConfig = [
+    {
+      title: "All",
+      itemEnum: FilterStatus.all,
+    },
+    {
+      title: "Active",
+      itemEnum: FilterStatus.active,
+    },
+    {
+      title: "Completed",
+      itemEnum: FilterStatus.completed,
+    }
+  ];
+
   return (
     <footer className="footer">
       <span className="todo-count">
@@ -16,42 +32,18 @@ function Footer({
         items left
       </span>
       <ul className="filters">
-        <li>
-          <a
-            href="/"
-            className={filter === "all" ? "selected" : ""}
-            onClick={(e) => {
-              e.preventDefault();
-              setFilter("all");
-            }}
-          >
-            All
-          </a>
-        </li>
-        <li>
-          <a
-            className={filter === "active" ? "selected" : ""}
-            href="/active"
-            onClick={(e) => {
-              e.preventDefault();
-              setFilter("active");
-            }}
-          >
-            Active
-          </a>
-        </li>
-        <li>
-          <a
-            className={filter === "completed" ? "selected" : ""}
-            href="/completed"
-            onClick={(e) => {
-              e.preventDefault();
-              setFilter("completed");
-            }}
-          >
-            Completed
-          </a>
-        </li>
+        {
+          FilterConfig.map(
+            configItem =>
+              <FooterFilterButtons
+                key={configItem.itemEnum}
+                isSelected={configItem.itemEnum === filter}
+                itemEnum={configItem.itemEnum}
+                title={configItem.title}
+                setFilter={setFilter}
+              />
+          )
+        }
       </ul>
       {hasCompleted && (
         <button
@@ -65,4 +57,4 @@ function Footer({
   );
 }
 
-export default React.memo(Footer);
+export default Footer;

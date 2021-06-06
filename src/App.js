@@ -12,6 +12,7 @@ import AddTodo from "./components/AddTodo/AddTodo";
 import { ListTodos } from "./components/ListTodos/ListTodos";
 import Footer from "./components/Footer/Footer";
 import ToggleTodos from "./components/ToggleTodos/ToggleTodos";
+import { FilterStatus } from "./utils/enums";
 import "./styles.css";
 
 function App(props) {
@@ -23,17 +24,19 @@ function App(props) {
     updateTodo,
     clearCompletedTodos } = props;
 
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState(FilterStatus.all);
 
   const filteredTodos = todos.filter((todo) => {
-    if (filter === "active") {
-      return !todo.completed;
+    switch (filter) {
+      case (FilterStatus.active):
+        return !todo.completed;
+      case (FilterStatus.completed):
+        return todo.completed;
+      case (FilterStatus.all):
+      default:
+        return todos;
     }
-    if (filter === "completed") {
-      return todo.completed;
-    }
-    return true;
-  });
+  })
 
   const uncompletedTodosCount = todos.reduce((count, todo) => {
     if (!todo.completed) {
@@ -71,11 +74,11 @@ function App(props) {
       </section>
       {todos.length > 0 && (
         <Footer
-          filter={filter}
           setFilter={setFilter}
           clearCompletedTodos={clearCompletedTodos}
           uncompletedTodosCount={uncompletedTodosCount}
           hasCompleted={hasCompleted}
+          filter={filter}
         />
       )}
     </section>
@@ -89,7 +92,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addNewTodo: todo => dispatch(addNewTodoAction(todo)),
+  addNewTodo: title => dispatch(addNewTodoAction(title)),
   toggleTodo: (id, completed) => dispatch(toggleTodoAction(id, completed)),
   toggleAllTodos: completed => dispatch(toggleAllTodosAction(completed)),
   removeTodo: id => dispatch(removeTodoAction(id)),
