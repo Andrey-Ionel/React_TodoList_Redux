@@ -1,6 +1,6 @@
 import React from "react";
 import "./footer.css";
-import FooterFilterButtons from "../FooterFilterButtons/FooterFilterButtons"
+import FooterFilterButton from "../FooterFilterButton/FooterFilterButton"
 import { FilterStatus } from "../../utils/enums";
 
 function Footer({
@@ -35,7 +35,7 @@ function Footer({
         {
           FilterConfig.map(
             configItem =>
-              <FooterFilterButtons
+              <FooterFilterButton
                 key={configItem.itemEnum}
                 isSelected={configItem.itemEnum === filter}
                 itemEnum={configItem.itemEnum}
