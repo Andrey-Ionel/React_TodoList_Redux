@@ -1,6 +1,6 @@
 import React from "react";
 import "./footer.css";
-import FooterFilterButton from "../FooterFilterButton/FooterFilterButton"
+import FooterFilterButton from "../FooterFilterButton"
 import { FilterStatus } from "../../utils/enums";
 
 const FilterConfig = [

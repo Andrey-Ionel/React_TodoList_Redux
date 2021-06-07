@@ -1,5 +1,5 @@
 import React from "react";
-import TodoItem from "../TodoItem/TodoItem";
+import TodoItem from "../TodoItem";
 import "./listTodos.css";
 
 export function ListTodos({ todos, toggleTodo, removeTodo, updateTodo }) {
