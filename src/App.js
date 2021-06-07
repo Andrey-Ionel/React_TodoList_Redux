@@ -42,7 +42,7 @@ function App(props) {
     if (!todo.completed) {
       count++;
     }
-    return count++;
+    return count;
   }, 0);
 
   const completedTodosCount = todos.reduce((count, todo) => {

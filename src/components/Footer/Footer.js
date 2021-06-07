@@ -3,6 +3,21 @@ import "./footer.css";
 import FooterFilterButton from "../FooterFilterButton/FooterFilterButton"
 import { FilterStatus } from "../../utils/enums";
 
+const FilterConfig = [
+  {
+    title: "All",
+    itemEnum: FilterStatus.all,
+  },
+  {
+    title: "Active",
+    itemEnum: FilterStatus.active,
+  },
+  {
+    title: "Completed",
+    itemEnum: FilterStatus.completed,
+  }
+];
+
 function Footer({
   clearCompletedTodos,
   uncompletedTodosCount,
@@ -10,21 +25,6 @@ function Footer({
   hasCompleted,
   filter
 }) {
-  const FilterConfig = [
-    {
-      title: "All",
-      itemEnum: FilterStatus.all,
-    },
-    {
-      title: "Active",
-      itemEnum: FilterStatus.active,
-    },
-    {
-      title: "Completed",
-      itemEnum: FilterStatus.completed,
-    }
-  ];
-
   return (
     <footer className="footer">
       <span className="todo-count">
